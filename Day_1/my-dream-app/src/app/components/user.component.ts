@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {PostsService} from '../services/posts.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {PostsService} from '../services/posts.service';
   templateUrl: `./user.component.html`,
   providers: [PostsService]
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   name: string
   email: string
   address: Address
@@ -14,7 +14,12 @@ export class UserComponent {
   showHobbies: boolean
   posts: Post[]
 
-  constructor(private postsService: PostsService) {
+  // constructor should ONLY be used to initialize the class' attributes
+  // the reason: component is easier to test and debug when their constructor is simple,
+  // and all the real work is handled in a separate method.
+  constructor(private postsService: PostsService) {}
+
+  ngOnInit(): void {
     this.name = "John Doe"
     this.email = "john@gmail.com"
     this.address = {
