@@ -4,9 +4,7 @@ import { BooleanUtil } from '../util/Boolean.util';
 
 @Injectable()
 export class AuthService {
-  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    BooleanUtil.parseBoolean(localStorage.getItem('isLoggedIn') ? localStorage.getItem('isLoggedIn') : false)
-  )
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(localStorage.getItem('isLoggedIn') === 'true')
   isLoggedIn$: Observable<boolean> = this.isLoggedIn.asObservable()
 
   constructor() {
