@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BooleanUtil } from '../util/Boolean.util';
 
 @Injectable()
 export class AuthService {
