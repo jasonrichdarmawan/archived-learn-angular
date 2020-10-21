@@ -11,19 +11,20 @@ export class FileUploadService {
     console.log('FileUploadService Initialized...')
   }
 
-  postFile(fileToUpload: File) {
-    const fileReader = new FileReader();
+  // TODO: refactor use formData.
+  postFile(fileToUpload: File, endpoint: string) {
+    const fileReader: FileReader = new FileReader();
     fileReader.readAsDataURL(fileToUpload);
-    let base64 = null;
+    let base64: string | ArrayBuffer = null;
     fileReader.onload = () => {
       base64 = fileReader.result
-    }    
+    }
     const headers = new HttpHeaders({ 'Content-Type': 'application/json;,multipart/form-data;' })
       // TODO: .set('role', sessionStorage.getItem("role"))
       // TODO: .set('token', sessionStorage.getItem("token"))
       .set('role', "9")
       .set("token", "abcd")
-    return this.httpClient.post(this.baseurl + 'path', { 'file': base64 }, { headers: headers })
+    return this.httpClient.post(this.baseurl + endpoint, { 'file': base64 }, { headers: headers })
   }
 
 }

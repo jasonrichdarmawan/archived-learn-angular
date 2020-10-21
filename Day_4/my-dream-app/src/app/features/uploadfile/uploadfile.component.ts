@@ -17,7 +17,7 @@ export class UploadFileComponent {
 
   onFileUpload() {
     this.fileUploadService
-      .postFile(this.fileToUpload)
+      .postFile(this.fileToUpload, "uploadfile")
       .subscribe((result: any) => {
         console.log(result['messagecode'], result['message'])
       })
