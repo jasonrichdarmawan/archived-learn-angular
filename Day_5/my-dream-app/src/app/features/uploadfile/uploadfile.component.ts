@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component } from "@angular/core";
 import { FileUploadService } from 'src/app/services/fileupload.service';
 
@@ -15,11 +16,16 @@ export class UploadFileComponent {
     this.fileToUpload = files.item(0)
   }
 
-  onFileUpload() {
-    this.fileUploadService
-      .postFile(this.fileToUpload, "uploadfile")
-      .subscribe((result: any) => {
-        console.log(result['messagecode'], result['message'])
+  async onFileUpload() {
+    (await this.fileUploadService
+      .postFile(this.fileToUpload, "uploadfile"))
+      .subscribe((response: HttpResponse<String>) => {
+        if (response.body === "OK") {
+          // TODO: do Something
+        } else {
+          // error
+        }
+        console.log(response.headers.keys(), response.body['message'])
       })
   }
 }

@@ -1,9 +1,15 @@
 package com.example.csvtodb.model;
 
-public class FileModel {
-  private String file;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-  public FileModel(String file) {
+public class FileModel {
+  private final String file;
+
+  public FileModel(@JsonProperty("file") String file) {
     this.file = file;
+  }
+
+  public String getFile() {
+    return file;
   }
 }

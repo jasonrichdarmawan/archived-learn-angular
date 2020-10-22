@@ -1,19 +1,33 @@
 package com.example.csvtodb.controller;
 
 import com.example.csvtodb.model.FileModel;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.FileReader;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/csv")
 public class CSVToDBController {
 
   @PostMapping
-  public ResponseEntity<String> postFile(@RequestBody FileModel file) {
-    return new ResponseEntity<String>(HttpStatus.CREATED);
+  @CrossOrigin("http://localhost:4200")
+  @ResponseBody
+  public ResponseEntity<String> postFile(@RequestHeader Map<String, String> requestHeaders, @RequestBody FileModel file) {
+    HttpHeaders responseHeaders = new HttpHeaders();
+    responseHeaders.add("Access-Control-Allow-Origin", "*");
+
+    System.out.println(requestHeaders.get("authorization") + file.getFile());
+    if (requestHeaders.get("authorization").split(" ")[1].equals("23")) {
+      // do Something
+      return new ResponseEntity<String>("{\"message\": \"OK\"}", HttpStatus.OK);
+    } else {
+      // error
+      return new ResponseEntity<String>("{\"message\": \"ERROR\"}", HttpStatus.FORBIDDEN);
+    }
+
   }
 }
