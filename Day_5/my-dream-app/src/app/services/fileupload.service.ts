@@ -34,7 +34,7 @@ export class FileUploadService {
       Authorization: 'Bearer 1',
     })
     headers = headers.set('Authorization', 'Bearer 23')
-    return this.httpClient.post(this.baseurl, { file: readAsText }, { headers: headers, observe: 'response' })
+    return this.httpClient.post(this.baseurl + endpoint, { file: readAsText }, { headers: headers, observe: 'response' })
   }
 
 }

@@ -13,6 +13,9 @@ import java.util.Map;
 @RequestMapping("/api/v1/csv")
 public class CSVToDBController {
 
+  // TODO: security implementation?
+  // 1. How to only get the Headers -> if the token is valid -> get the Body aswell.
+  // Client -> Endpoint
   @PostMapping
   @CrossOrigin("http://localhost:4200")
   @ResponseBody
