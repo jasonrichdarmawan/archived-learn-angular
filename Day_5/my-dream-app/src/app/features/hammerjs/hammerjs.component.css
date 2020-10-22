@@ -1,0 +1,6 @@
+.box {
+  background-color: #76b490;
+  height: 200px;
+  text-align: center;
+  overflow: auto;
+}
