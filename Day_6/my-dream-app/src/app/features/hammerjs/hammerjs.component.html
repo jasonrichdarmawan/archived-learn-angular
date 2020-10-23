@@ -1,0 +1,34 @@
+<h1>HammerJS</h1>
+
+<div class="box" (swipe)="onSwipe($event)">
+  <h1>Swipe Gesture</h1>
+  <p>Works with both mouse and touch.</p>
+  <h5 [innerHTML]="direction"></h5>
+</div>
+
+<hr />
+
+<div
+  class="box"
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState()"
+  (swipeleft)="startAnimation('slideOutLeft')"
+  (swiperight)="startAnimation('zoomOutRight')"
+  (swipeup)="startAnimation('rotateOutUpRight')"
+  (swipedown)="startAnimation('flipOutY')"
+>
+  <button (tap)="startAnimation('wobble')">wobble</button>
+  <button (tap)="startAnimation('swing')">swing</button>
+</div>
+
+<hr />
+
+<div class="box">
+  <div
+    (pan)="onPan($event)"
+    (panend)="onPanEnd()"
+    [style.transform]="'translate3d(' + x + 'px, ' + y + 'px, 0px)'"
+  >
+    <h1>Pan me</h1>
+  </div>
+</div>
