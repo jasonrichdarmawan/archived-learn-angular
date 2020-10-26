@@ -26,17 +26,18 @@ export class UploadFileComponent {
 
   // TODO: security implementation?
   // 1. How to wait for Response Headers before sending the file?
-  async onFileUpload() {
-    (await this.fileUploadService
-      .postFile(this.fileToUpload, ""))
+  onFileUpload() {
+    this.fileUploadService
+      .postFile(this.fileToUpload, "")
       .subscribe((response: HttpResponse<String>) => {
         if (response.body === "OK") {
           // TODO: do Something
         } else {
           // error
         }
+        this.fileElementRef.nativeElement.value = ""
+        this.fileToUpload = null
         console.log(response.headers.keys(), response.body['message'])
       })
-    this.fileToUpload = null;
   }
 }

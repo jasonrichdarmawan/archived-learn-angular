@@ -1,8 +1,5 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class FileUploadService {
@@ -13,6 +10,11 @@ export class FileUploadService {
     console.log('FileUploadService Initialized...')
   }
 
+  /**
+   * 
+   * @param fileToUpload 
+   * @deprecated use formData.
+   */
   readFileAsync(fileToUpload: File) {
     return new Promise<String | ArrayBuffer>((resolve, reject) => {
       let fileReader = new FileReader()
@@ -21,20 +23,25 @@ export class FileUploadService {
         resolve(fileReader.result)
       }
 
-      fileReader.onerror = reject;
+      fileReader.onerror = reject
 
-      fileReader.readAsDataURL(fileToUpload);
+      fileReader.readAsDataURL(fileToUpload)
     })
   }
 
-  // TODO: refactor use formData.
-  async postFile(fileToUpload: File, endpoint: string) {
-    const readAsText: String | ArrayBuffer = await this.readFileAsync(fileToUpload)
+  // refactored with formData.
+  postFile(fileToUpload: File, endpoint: string) {
+    // const readAsText: String | ArrayBuffer = await this.readFileAsync(fileToUpload)
+
+    const formData: FormData = new FormData()
+    formData.append('file', fileToUpload, fileToUpload.name)
+
     let headers = new HttpHeaders({
       Authorization: 'Bearer 1',
     })
     headers = headers.set('Authorization', 'Bearer 23')
-    return this.httpClient.post(this.baseurl + endpoint, { file: readAsText }, { headers: headers, observe: 'response' })
+
+    return this.httpClient.post(this.baseurl + endpoint, formData, { headers: headers, observe: 'response' })
   }
 
 }

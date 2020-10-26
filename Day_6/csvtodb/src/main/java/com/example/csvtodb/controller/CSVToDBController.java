@@ -5,8 +5,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileReader;
+import java.io.*;
 import java.util.Map;
 
 @RestController
@@ -19,11 +20,22 @@ public class CSVToDBController {
   @PostMapping
   @CrossOrigin("http://localhost:4200")
   @ResponseBody
-  public ResponseEntity<String> postFile(@RequestHeader Map<String, String> requestHeaders, @RequestBody FileModel file) {
+  public ResponseEntity<String> postFile(
+          @RequestHeader Map<String, String> requestHeaders,
+//          @RequestBody FileModel file
+          @RequestParam("file") MultipartFile file
+          ) {
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.add("Access-Control-Allow-Origin", "*");
 
-    System.out.println(requestHeaders.get("authorization") + file.getFile());
+    try {
+      byte[] bytes = file.getBytes();
+      String formData = new String(bytes);
+      System.out.println(requestHeaders.get("authorization") + formData);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     if (requestHeaders.get("authorization").split(" ")[1].equals("23")) {
       // do Something
       return new ResponseEntity<String>("{\"message\": \"OK\"}", HttpStatus.OK);
