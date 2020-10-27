@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'uploadfile',
     loadChildren: () => import('./features/uploadfile/uploadfile.module').then(m => m.UploadFileModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./features/search/search.module').then(m => m.SearchModule)
   }
 ];
 

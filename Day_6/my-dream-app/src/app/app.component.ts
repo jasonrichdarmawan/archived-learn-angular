@@ -16,6 +16,7 @@ import { AuthService } from './services/auth.service';
       </li>
       <li><a routerLink="/hammerjs">HammerJS</a></li>
       <li><a routerLink="/uploadfile">Upload File</a></li>
+      <li><a routerLink="/search">Search</a></li>
     </ul>
     <router-outlet></router-outlet>
   `,

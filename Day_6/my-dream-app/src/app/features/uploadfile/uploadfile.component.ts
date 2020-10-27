@@ -1,11 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from "@angular/core";
+import { FileDownloadService } from 'src/app/services/filedownload.service';
 import { FileUploadService } from 'src/app/services/fileupload.service';
 
 @Component({
   selector: 'uploadfile',
   templateUrl: './uploadfile.component.html',
-  providers: [FileUploadService]
+  providers: [FileUploadService, FileDownloadService]
 })
 export class UploadFileComponent {
   @ViewChild("file")
@@ -13,7 +14,7 @@ export class UploadFileComponent {
 
   fileToUpload: File = null;
 
-  constructor(private fileUploadService: FileUploadService) { }
+  constructor(private fileUploadService: FileUploadService, private fileDownloadService: FileDownloadService) { }
 
   onFileInput(files: FileList) {
     // e.g: sheet1.csv => "csv" === "csv"
@@ -39,5 +40,10 @@ export class UploadFileComponent {
         this.fileToUpload = null
         console.log(response.headers.keys(), response.body['message'])
       })
+  }
+
+  onDownloadRequest() {
+    this.fileDownloadService
+      .getFile()
   }
 }

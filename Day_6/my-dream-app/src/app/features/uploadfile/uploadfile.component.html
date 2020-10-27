@@ -1,3 +1,4 @@
 <label for="file">Choose File</label>
 <input #file id="file" type="file" accept=".csv" (change)="onFileInput($event.target.files)" />
 <button type="submit" (click)="onFileUpload()">Upload</button>
+<button type="submit" (click)="onDownloadRequest()">Download</button>
