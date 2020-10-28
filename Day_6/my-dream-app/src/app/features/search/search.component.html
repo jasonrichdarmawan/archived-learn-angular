@@ -2,6 +2,12 @@
 <select (change)="setSearch($event.target.value)">
   <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
 </select>
+<div class="stickbottom">
+  <div>A</div>
+  <div>B</div>
+  <div>C</div>
+  <div (click)="setSearch('sunt')">sunt</div>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
