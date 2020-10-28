@@ -1,6 +1,5 @@
 package com.example.csvtodb.controller;
 
-import com.example.csvtodb.model.FileModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -8,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,8 +61,8 @@ public class CSVToDBController {
 
     if (requestHeaders.get("authorization").split(" ")[1].equals("23")) {
       // do Something
-//      return new ResponseEntity(bytes, HttpStatus.OK);
-      return new ResponseEntity("{\"href\": \"https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv\"}", HttpStatus.OK);
+      return new ResponseEntity(bytes, HttpStatus.OK);
+//      return new ResponseEntity("{\"href\": \"https://people.sc.fsu.edu/~jburkardt/data/csv/addresses.csv\"}", HttpStatus.OK);
     } else {
       // error
       return new ResponseEntity<String>("{\"message\": \"ERROR\"}", HttpStatus.FORBIDDEN);

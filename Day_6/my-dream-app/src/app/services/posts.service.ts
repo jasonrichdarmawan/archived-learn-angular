@@ -11,7 +11,7 @@ export class PostsService {
   getPosts() {
     return this.httpClient.get<Post[]>('https://jsonplaceholder.typicode.com/posts')
       .pipe(
-        map(response => response.filter(item => item.id === 1))
+        // map(response => response.filter(item => item.id === 1))
       )
   }
 }

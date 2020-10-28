@@ -1,1 +1,22 @@
 <input type="text" #search>
+<select (change)="setSearch($event.target.value)">
+  <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
+</select>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">userId</th>
+      <th scope="col">id</th>
+      <th scope="col">title</th>
+      <th scope="col">body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts$">
+      <td>{{ post.userId }}</td>
+      <td>{{ post.id }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.body }}</td>
+    </tr>
+  </tbody>
+</table>
