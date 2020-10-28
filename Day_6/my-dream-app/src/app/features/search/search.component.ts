@@ -49,6 +49,10 @@ export class SearchComponent implements OnInit {
     this.posts$ = this.filter(value)
   }
 
+  onDelete(id: number) {
+    // do Something api related.
+  }
+
   ngAfterViewInit(): void {
     fromEvent(this.search.nativeElement, 'keydown')
       .pipe(
