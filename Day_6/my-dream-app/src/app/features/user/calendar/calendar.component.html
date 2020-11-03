@@ -31,25 +31,25 @@
     <div class="input-group">
       <input
         #dpFromDate
+        type="button"
         class="form-control"
         placeholder="yyyy-mm-dd"
         name="dpFromDate"
         (click)="datepicker.toggle()"
         [value]="formatter.format(fromDate)"
-        (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
       />
     </div>
   </div>
   <div class="form-group ml-2">
     <div class="input-group">
-      <input
+        <input
         #dpToDate
+        type="button"
         class="form-control"
         placeholder="yyyy-mm-dd"
         name="dpToDate"
         (click)="datepicker.toggle()"
         [value]="formatter.format(toDate)"
-        (input)="toDate = validateInput(toDate, dpToDate.value)"
       />
     </div>
   </div>
