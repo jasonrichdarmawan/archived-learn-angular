@@ -5,14 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { CommonModule } from '@angular/common';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   imports: [
     UserRoutingModule,
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbDatepickerModule,
   ],
-  declarations: [UserComponent],
+  declarations: [UserComponent, CalendarComponent],
 })
 export class UserModule { }

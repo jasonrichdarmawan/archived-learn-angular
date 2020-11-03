@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Post, PostsService} from '../../services/posts.service';
+import { Post, PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'user',
   templateUrl: `./user.component.html`,
+  styleUrls: ['./calendar/calendar.component.css'],
   providers: [PostsService]
 })
 export class UserComponent implements OnInit {
@@ -17,7 +18,7 @@ export class UserComponent implements OnInit {
   // constructor should ONLY be used to initialize the class' attributes
   // the reason: component is easier to test and debug when their constructor is simple,
   // and all the real work is handled in a separate method.
-  constructor(private postsService: PostsService) {}
+  constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
     this.name = "John Doe"

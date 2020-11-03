@@ -7,7 +7,6 @@ import { AuthService } from './services/auth.service';
 
 import * as Hammer from 'hammerjs';
 import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -24,7 +23,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     BrowserModule,
     AppRoutingModule,
     HammerModule, // only happens to @angular/core ^9. see: https://levelup.gitconnected.com/making-hammerjs-work-with-angular-9-81d289159320
-    BrowserAnimationsModule, NgbModule
+    BrowserAnimationsModule
   ],
   providers: [AuthService, {
     provide: HAMMER_GESTURE_CONFIG,
