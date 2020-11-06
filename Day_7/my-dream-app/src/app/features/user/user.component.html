@@ -1,0 +1,69 @@
+<calendar></calendar>
+<h1>{{ name }}</h1>
+<p><strong>Email:</strong> {{ email }}</p>
+<p>
+  <strong>Address:</strong> {{ address.street }}, {{ address.city }},
+  {{ address.state }}
+</p>
+<button (click)="toggleHobbies()">
+  {{ showHobbies ? "Hide Hobbies" : "Show Hobbies" }}
+</button>
+<div *ngIf="showHobbies">
+  <h3>Hobbies</h3>
+  <ul>
+    <li *ngFor="let hobby of hobbies; index as index">
+      {{ hobby }} <button (click)="deleteHobby(index)">X</button>
+    </li>
+  </ul>
+  <form (submit)="addHobby(hobby.value)">
+    <label>Add Hobby: </label><br />
+    <input type="text" #hobby /><br />
+  </form>
+</div>
+<hr />
+<div *ngIf="response">{{ response }}</div>
+<form ngNativeValidate #f="ngForm" (ngSubmit)="handleSubmit(f)">
+  <label>Name: </label><br />
+  <input
+    type="text"
+    name="name"
+    [(ngModel)]="name"
+    required
+    pattern="[a-zA-Z\s]{8,35}"
+    title="Minimum and Maximum name length is 8 - 35 alphabets"
+  /><br />
+  <label>Street: </label><br />
+  <input
+    type="text"
+    name="street"
+    [(ngModel)]="address.street"
+    required
+    pattern="[\w\s]{8,35}"
+    title="Minimum and Maximum length is 8-35 alphabets"
+  /><br />
+  <label>City: </label><br />
+  <input
+    type="text"
+    name="city"
+    [(ngModel)]="address.city"
+    required
+    pattern="[\w\s]{8,35}"
+    title="Minimum and Maximum length is 8-35 alphabets"
+  /><br />
+  <label>State: </label><br />
+  <input
+    type="text"
+    name="state"
+    [(ngModel)]="address.state"
+    required
+    pattern="[\w\s]{8,35}"
+    title="Minimum and Maximum length is 8-35 alphabets"
+  /><br />
+  <input type="submit" value="Submit" />
+</form>
+<hr />
+<h3>Posts</h3>
+<div *ngFor="let post of posts">
+  <h3>{{ post.title }}</h3>
+  <p>{{ post.body }}</p>
+</div>
