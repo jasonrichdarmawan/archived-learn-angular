@@ -1,21 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
+export interface fromDateToDate {
+  fromDate: NgbDate
+  toDate: NgbDate
+}
 @Component({
-  selector: 'calendar',
+  selector: 'calendar-component',
   templateUrl: `./calendar.component.html`,
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
+  @Output() onChange: EventEmitter<fromDateToDate> = new EventEmitter<fromDateToDate>();
   hoveredDate: NgbDate | null
-  fromDate: NgbDate | null
-  toDate: NgbDate | null
+  @Input() fromDate: NgbDate | null
+  @Input() toDate: NgbDate | null
 
   constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) { }
 
   ngOnInit(): void {
-    this.fromDate = this.calendar.getToday()
-    this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10)
+    /**
+     * redudant line of code for a component which use @Input() and @Output()
+     */
+    // this.fromDate = this.calendar.getToday()
+    // this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10)
   }
 
   onDateSelection(date: NgbDate) {
@@ -23,6 +31,7 @@ export class CalendarComponent implements OnInit {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
+      this.onChange.emit({fromDate: this.fromDate, toDate: this.toDate})
     } else {
       this.toDate = null;
       this.fromDate = date;

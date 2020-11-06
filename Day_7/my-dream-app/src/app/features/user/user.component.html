@@ -1,4 +1,15 @@
-<calendar></calendar>
+<calendar-component
+  [fromDate]="fromDate"
+  [toDate]="toDate"
+  (onChange)="handleEmitCalendar($event)"
+></calendar-component>
+<div>
+  <label>
+    This input is outside the calendar-component
+    <input type="date" [value]="jsFromDate" (change)="handleInputCalendar($event.target.value)"/>
+  </label>
+</div>
+
 <h1>{{ name }}</h1>
 <p><strong>Email:</strong> {{ email }}</p>
 <p>

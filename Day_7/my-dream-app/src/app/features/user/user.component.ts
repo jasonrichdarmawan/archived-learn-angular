@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Post, PostsService } from '../../services/posts.service';
+import { fromDateToDate } from "./calendar/calendar.component";
 
 @Component({
   selector: 'user',
@@ -16,6 +18,10 @@ export class UserComponent implements OnInit {
   hobbies: string[]
   showHobbies: boolean
   posts: Post[]
+
+  fromDate: NgbDate | null
+  jsFromDate: string
+  toDate: NgbDate | null
 
   // constructor should ONLY be used to initialize the class' attributes
   // the reason: component is easier to test and debug when their constructor is simple,
@@ -37,6 +43,10 @@ export class UserComponent implements OnInit {
       // console.log(posts)
       this.posts = posts
     })
+
+    this.fromDate = new NgbDate(2020, 10, 15)
+    this.toDate = new NgbDate(2020, 10, 16)
+    this.jsFromDate = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString().split("T")[0]
   }
 
   toggleHobbies() {
@@ -57,6 +67,19 @@ export class UserComponent implements OnInit {
     } else if (f.invalid) {
       this.response = "Invalid"
     }
+  }
+
+  handleEmitCalendar(fromDateToDate: fromDateToDate) {
+    this.fromDate = fromDateToDate.fromDate
+    this.toDate = fromDateToDate.toDate
+
+    this.jsFromDate = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString().split("T")[0]
+    console.log(this.jsFromDate)
+  }
+
+  handleInputCalendar(value: string) {
+    const date = value.split("-")
+    this.fromDate = new NgbDate(parseInt(date[0]),parseInt(date[1]),parseInt(date[2]))
   }
 }
 
