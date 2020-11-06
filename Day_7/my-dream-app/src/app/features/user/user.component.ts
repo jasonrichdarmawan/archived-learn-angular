@@ -74,7 +74,6 @@ export class UserComponent implements OnInit {
     this.toDate = fromDateToDate.toDate
 
     this.jsFromDate = new Date(`${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`).toISOString().split("T")[0]
-    console.log(this.jsFromDate)
   }
 
   handleSendCalendar(value: string) {
