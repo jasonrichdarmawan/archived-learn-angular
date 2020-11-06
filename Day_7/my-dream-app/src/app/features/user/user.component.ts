@@ -69,7 +69,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-  handleEmitCalendar(fromDateToDate: fromDateToDate) {
+  handleListenCalendar(fromDateToDate: fromDateToDate) {
     this.fromDate = fromDateToDate.fromDate
     this.toDate = fromDateToDate.toDate
 
@@ -77,7 +77,7 @@ export class UserComponent implements OnInit {
     console.log(this.jsFromDate)
   }
 
-  handleInputCalendar(value: string) {
+  handleSendCalendar(value: string) {
     const date = value.split("-")
     this.fromDate = new NgbDate(parseInt(date[0]),parseInt(date[1]),parseInt(date[2]))
   }

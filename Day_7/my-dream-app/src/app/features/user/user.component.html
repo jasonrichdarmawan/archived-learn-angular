@@ -1,12 +1,12 @@
 <calendar-component
   [fromDate]="fromDate"
   [toDate]="toDate"
-  (onChange)="handleEmitCalendar($event)"
+  (onChange)="handleListenCalendar($event)"
 ></calendar-component>
 <div>
   <label>
     This input is outside the calendar-component
-    <input type="date" [value]="jsFromDate" (change)="handleInputCalendar($event.target.value)"/>
+    <input type="date" [value]="jsFromDate" (change)="handleSendCalendar($event.target.value)"/>
   </label>
 </div>
 
