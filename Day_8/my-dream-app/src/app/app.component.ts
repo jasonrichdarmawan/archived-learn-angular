@@ -20,11 +20,8 @@ import { AuthService } from './services/auth.service';
     </ul>
     <router-outlet></router-outlet>
   `,
-  // templateUrl: './app.component.html',
-  // styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // title = 'my-dream-app';
   isLoggedIn: boolean;
 
   constructor(public authService: AuthService, public router: Router) {
