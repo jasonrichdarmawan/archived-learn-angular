@@ -2,12 +2,11 @@ package com.example.csvtodb.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
@@ -20,7 +19,7 @@ public class CSVToDBController {
   // 1. How to only get the Headers -> if the token is valid -> get the Body aswell.
   // Client -> Endpoint
   @PostMapping
-  @CrossOrigin("http://localhost:4201")
+  @CrossOrigin("http://localhost:4200")
   @ResponseBody
   public ResponseEntity<String> postFile(
           @RequestHeader Map<String, String> requestHeaders,
@@ -33,7 +32,10 @@ public class CSVToDBController {
     try {
       byte[] bytes = file.getBytes();
       String formData = new String(bytes);
-      System.out.println(requestHeaders.get("authorization") + formData);
+      System.out.println(requestHeaders.get("authorization") + '\n' +
+              file.getOriginalFilename() + '\n' +
+              formData
+      );
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -49,7 +51,7 @@ public class CSVToDBController {
   }
 
   @GetMapping
-  @CrossOrigin("http://localhost:4201")
+  @CrossOrigin("http://localhost:4200")
   public ResponseEntity<String> getFile(@RequestHeader Map<String, String> requestHeaders) {
     String fileName = "Untitled spreadsheet - Sheet1 (1).csv";
     byte[] bytes = null;
