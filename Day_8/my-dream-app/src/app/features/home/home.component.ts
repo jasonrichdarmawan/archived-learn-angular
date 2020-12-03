@@ -5,12 +5,12 @@ import { Post, PostsService } from '../../services/posts.service';
 import { fromDateToDate } from "./calendar/calendar.component";
 
 @Component({
-  selector: 'user',
-  templateUrl: `./user.component.html`,
+  selector: 'home',
+  templateUrl: `./home.component.html`,
   styleUrls: ['./calendar/calendar.component.css'],
   providers: [PostsService]
 })
-export class UserComponent implements OnInit {
+export class HomeComponent implements OnInit {
   name: string
   email: string
   address: Address
