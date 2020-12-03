@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { SubscribeService } from 'src/app/services/subscribe.service';
 import { Post, PostsService } from '../../services/posts.service';
 import { fromDateToDate } from "./calendar/calendar.component";
 
@@ -8,7 +9,7 @@ import { fromDateToDate } from "./calendar/calendar.component";
   selector: 'home',
   templateUrl: `./home.component.html`,
   styleUrls: ['./calendar/calendar.component.css'],
-  providers: [PostsService]
+  providers: [PostsService, SubscribeService]
 })
 export class HomeComponent implements OnInit {
   name: string
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   hobbies: string[]
   showHobbies: boolean
   posts: Post[]
+  subscribedName: string
 
   fromDate: NgbDate | null
   jsFromDate: string
@@ -26,7 +28,20 @@ export class HomeComponent implements OnInit {
   // constructor should ONLY be used to initialize the class' attributes
   // the reason: component is easier to test and debug when their constructor is simple,
   // and all the real work is handled in a separate method.
-  constructor(private postsService: PostsService) {}
+  constructor(private postsService: PostsService, private subscribeService: SubscribeService) {
+
+    this.subscribeService
+      .subscribeName()
+      .subscribe((response: {name: string}) => {
+        this.subscribeService.name.next(response.name)
+      })
+    
+    // this code should be on different component e.g ./calendar.component.ts
+    // the intention is if ./home.component.ts update the subscribedName attribute, the changes will be applied to the child component too, without @Output
+    this.subscribeService.name.subscribe(data => {
+      this.subscribedName = data
+    })
+  }
 
   ngOnInit(): void {
     this.name = "John Doe"

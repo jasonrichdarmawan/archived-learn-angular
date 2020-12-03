@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { SubscribeService } from 'src/app/services/subscribe.service';
 
 export interface fromDateToDate {
   fromDate: NgbDate
@@ -15,8 +16,9 @@ export class CalendarComponent implements OnInit {
   hoveredDate: NgbDate | null
   @Input() fromDate: NgbDate | null
   @Input() toDate: NgbDate | null
+  subscribedName: string
 
-  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) { }
+  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private subscribeService: SubscribeService) { }
 
   ngOnInit(): void {
     /**
@@ -24,6 +26,10 @@ export class CalendarComponent implements OnInit {
      */
     // this.fromDate = this.calendar.getToday()
     // this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10)
+
+    this.subscribeService.name.subscribe(data => {
+      this.subscribedName = data
+    })
   }
 
   onDateSelection(date: NgbDate) {
