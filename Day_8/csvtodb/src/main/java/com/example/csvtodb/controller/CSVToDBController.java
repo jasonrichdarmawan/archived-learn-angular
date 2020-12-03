@@ -56,7 +56,7 @@ public class CSVToDBController {
     String fileName = "Untitled spreadsheet - Sheet1 (1).csv";
     byte[] bytes = null;
     try {
-      bytes = Files.readAllBytes(Path.of("Untitled spreadsheet - Sheet1 (1).csv"));
+      bytes = Files.readAllBytes(Path.of(fileName));
     } catch (IOException e) {
       e.printStackTrace();
     }

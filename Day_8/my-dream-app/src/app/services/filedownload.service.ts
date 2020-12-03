@@ -15,7 +15,7 @@ export class FileDownloadService {
     })
     headers = headers.set('Authorization', 'Bearer 23')
 
-    return this.httpClient.get(this.baseurl, {headers: headers})
+    return this.httpClient.get(this.baseurl, {headers: headers, responseType: 'blob'})
       .subscribe((response: any) => {
         if (response instanceof Blob) {
           let hiddenElement = document.createElement("a")
